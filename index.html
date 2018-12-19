@@ -2,25 +2,35 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>MusicGame_CG_Project</title>
+		<title>RunRun - Jérémy BOUNY</title>
 		<link href="assets/css/style.css" rel="stylesheet">
+		<link href='styles/index.css'     rel='stylesheet'/>
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="mobile-web-app-capable" content="yes" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
 	</head>
 
 	<body>	
+		<header>
+			<button id="add">选择音乐</button>
+			<input id="loadfile" type="file">
+			
+		</header>
+		<!-- 音频可视化场景 -->
+		<div class="right"></div>
+		<!-- 音频解码器 -->
+		<script src="assets/js/musicdecoder.js"></script>
+		<!-- 可视化引擎 -->
+		<script src="assets/js/game/music.js"></script>
+
 		<div id="canvas-3d" class="viewer"></div>
 
-	<audio autoplay="autoplay" controls="controls"loop="loop" preload="auto"
-		src=".\Track 1.mp3">
- 	</audio>
-
 		<!-- External libraries -->
+		<script src="assets/libs/jquery.min.js"></script>
 		<script src="assets/libs/three.min.js"></script>
 		<script src="assets/libs/three/OrbitControls.js"></script>
 		<script src="assets/libs/three/water-material.js"></script>
-    <script src="assets/libs/jquery.min.js"></script>
 		<script src="assets/libs/RequestAnimationFrame.js"></script>
 		<script src="assets/libs/box2d.js"></script>
 		
@@ -41,3 +51,7 @@
 		<script src="assets/js/main.js"></script>
 	</body>
 </html>
+
+
+
+
