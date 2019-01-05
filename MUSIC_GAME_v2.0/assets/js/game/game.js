@@ -322,8 +322,8 @@ var GAME =
 			param: 3,
 			filterparam: 1,
 			filter: [ GAMETERRAIN_FILTER ],
-			postgen: [ MOUNTAINS2_COLORS ],
-			effect: [ DESTRUCTURE_EFFECT ],
+		//	postgen: [ MOUNTAINS2_COLORS ],
+		//	effect: [ DESTRUCTURE_EFFECT ],
 			canvas: this.ms_HeightMap
 		};
 		this.ms_Clock = new THREE.Clock();
