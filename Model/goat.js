@@ -1,17 +1,4 @@
-// Converted from: ../files/srcModels/01_black_soup/goat/goatCharge_A_0016/obj/goatCharge_A_001.obj
-//  vertices: 350
-//  faces: 696
-//  normals: 0
-//  colors: 6
-//  uvs: 473
-//  materials: 1
-//  edges: 0
-//
-//  Generated with OBJ -> Three.js converter
-//  http://github.com/alteredq/three.js/blob/master/utils/exporters/convert_obj_three.py
-
-
-var model = {
+{
 
     "version" : 2,
     
@@ -59,7 +46,4 @@ var model = {
 
     "edges" : []
 
-};
-
-postMessage( model );
-close();
+}

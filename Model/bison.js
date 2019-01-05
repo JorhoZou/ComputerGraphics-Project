@@ -1,17 +1,4 @@
-// Converted from: ../files/srcModels/01_black_soup/quadruped_A/bison/bison_gallopB_v020/obj_seq/bison_gallopB_001.obj
-//  vertices: 488
-//  faces: 972
-//  normals: 0
-//  colors: 1
-//  uvs: 674
-//  materials: 1
-//  edges: 0
-//
-//  Generated with OBJ -> Three.js converter
-//  http://github.com/alteredq/three.js/blob/master/utils/exporters/convert_obj_three.py
-
-
-var model = {
+{
 
     "version" : 2,
     
@@ -63,7 +50,4 @@ var model = {
 
     "edges" : []
 
-};
-
-postMessage( model );
-close();
+}
