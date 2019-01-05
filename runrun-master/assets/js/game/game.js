@@ -43,8 +43,8 @@ var PLAYER =
 	ms_B2DBody: null,
 	ms_Group: null,
 	ms_GroupHeight: null,
-	ms_Speed: 2,
-	ms_Jump: 2,
+	ms_Speed: 2.18,
+	ms_Jump: 3,
 	ms_Size: {
 		x: 0.25,
 		y: 0.12
@@ -176,7 +176,9 @@ var GROUND =
 		aGroundPoints.push( CONV.ToVector2D( { x: 3, y: -0.1 } ) );
 		for( var i = 3; i < inParameters.heightSegments; i += 1.2 )
 		{
-			var x1 = i, x2 = i + 1, y = RAND_MT.Random() * 0.5;
+						var x1 = j, x2 = j +0.255/2;
+			y = (mystream[i]+0.1)*2*(1-0.001*RAND_MT.Random())-0.2;
+			j+=0.33045/2;
 			
 			aEdgeShape.Set( new Box2D.b2Vec2( x1, 0 ), new Box2D.b2Vec2( x2, y ) );
 			GAME.ms_B2DWorld.CreateBody( new Box2D.b2BodyDef() ).CreateFixture( aEdgeShape, 0.0 );
@@ -315,7 +317,7 @@ var GAME =
 	
 	B2DInitialize: function( inParameters )
 	{	
-		var aGravity = new Box2D.b2Vec2( 0.0, -3.0 );
+		var aGravity = new Box2D.b2Vec2( 0.0, -10.5 );
 		this.ms_B2DWorld = new Box2D.b2World( aGravity, true );
 		
         var aEdgeShape = new Box2D.b2EdgeShape();
