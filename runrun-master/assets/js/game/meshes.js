@@ -1,13 +1,11 @@
 var MESHES =
 {
-	Type: { Cow:0, Elk:1, Fox:2, Parrot:3, Deer: 4, Goat: 5},
+	Type: { Cow:0, Elk:1, Fox:2, Parrot:3 },
 	Names:[
 		"assets/libs/obj/animals/cow.js",
 		"assets/libs/obj/animals/elk.js",
 		"assets/libs/obj/animals/fox.js",
 		"assets/libs/obj/animals/parrot.js",
-		"assets/libs/obj/animals/deer.js",
-		"assets/libs/obj/animals/goat.js",
 	],
 	ms_MorphsGeometry: [],
 	ms_Morphs: [],
