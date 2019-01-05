@@ -122,6 +122,8 @@ var PLAYER =
 		this.ms_GroupHeight.add( this.ms_Mesh );
 		if(myparam == 0)
 			this.ms_GroupHeight.add( DISPLAY.ms_Camera ) ;
+		else
+			DISPLAY.ms_Camera.position.set(13,200,6);
 		this.ms_Group.add( this.ms_GroupHeight ) ;
 		DISPLAY.ms_Scene.add( this.ms_Group );
 		
