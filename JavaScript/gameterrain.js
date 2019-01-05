@@ -1,4 +1,4 @@
-var GAME_Gradient = {
+var GAMETERRAIN_FILTER = {
     Apply: function(inCanvas, inParameters) {
 
         var context = inCanvas.getContext("2d");
@@ -11,8 +11,8 @@ var GAME_Gradient = {
 
         // 地形
         var gradient = context.createLinearGradient(inCanvas.width, 0, 0, 0);
-        gradient.addColorStop(0, '#1b1b1b');
-        gradient.addColorStop(1, '#1b1b1b');
+        gradient.addColorStop(0, '#111');
+        gradient.addColorStop(1, '#111');
         context.fillStyle = gradient;
         context.rect(0, 0, inCanvas.width, inCanvas.height);
         context.fill();
