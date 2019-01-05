@@ -12,18 +12,18 @@
 	</head>
 
 	<body>	
-		<header>
+		<div id="select-music">
 			<button id="add">选择音乐</button>
 			<input id="loadfile" type="file">
-			
-		</header>
-
-		<div class="right"></div>
+		</div>
+		<div id="start-game">
+			<div id="canvas-start" class="viewer"></div>
+		</div>
 
 		<script src="assets/js/musicdecoder.js"></script>
 		<script src="assets/js/game/music.js"></script>
 
-		<div id="canvas-3d" class="viewer"></div>
+		<div id="canvas-3d" class="viewer" ></div>
 
 		<!-- External libraries -->
 		<script src="assets/libs/jquery.min.js"></script>
@@ -49,6 +49,7 @@
 		<script src="assets/js/game/meshes.js"></script>
 		<script src="assets/js/game/rhythms.js"></script>
 		<script src="assets/js/main.js"></script>
+		<script src="assets/js/game/startgame2.js"></script>
 	</body>
 </html>
 

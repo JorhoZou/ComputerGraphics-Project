@@ -14,3 +14,21 @@ body {
 	height : 100px;
 	/*display : none;*/
 }
+#start-game{
+	height: 100%;
+	width: 100%;
+	text-align: center;
+}
+#canvas-start{
+	height: 100%;
+	width: 100%;
+}
+#button-start{
+	top: 70%;
+	position: absolute;
+}
+#select-music{
+	top: 0%;
+	left: 50%;
+	position: absolute;
+}

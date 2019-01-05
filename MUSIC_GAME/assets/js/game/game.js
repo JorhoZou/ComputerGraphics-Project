@@ -52,9 +52,10 @@ var PLAYER =
 		y: 0.12
 	},
 
-	Initialize: function()
+	Initialize: function(myparam)
 	{
 		// Load the player model (fox)
+	if(myparam == 0){
 		MESHES.Load( MESHES.Type.Fox, function( inGeometry ) {
 			var aMesh = MESHES.AddMorph( inGeometry );
 			aMesh.rotation.set( 0, Math.PI, 0);
@@ -64,7 +65,7 @@ var PLAYER =
 			PLAYER.ms_Mesh.add( aMesh );
 			aMesh.position.y = -0.7;
 		} );
-		
+	}
 		// // Load a companion
 		// MESHES.Load( MESHES.Type.Parrot, function( inGeometry ) {
 		// 	var aMesh = MESHES.AddMorph( inGeometry );
@@ -307,7 +308,7 @@ var GAME =
 	ms_HeightMap: null,
 	ms_Clock: null,
 	
-	Initialize: function( inIdCanvas )
+	Initialize: function( inIdCanvas, myparam)
 	{
 		this.ms_HeightMap = TERRAINGEN.CreateCanvas( 0, 0 );
 		this.ms_Parameters = {
@@ -335,8 +336,9 @@ var GAME =
 		MESHES.Initialize();
 		DISPLAY.Initialize( inIdCanvas );
 		this.B2DInitialize( this.ms_Parameters );
-		PLAYER.Initialize();
-		GROUND.Initialize( this.ms_Parameters );
+		PLAYER.Initialize(myparam);
+		if(myparam == 0)
+			GROUND.Initialize( this.ms_Parameters );
 		TREES.Initialize();
 	},
 	//////////////////////////////////////////////////////////////////////
@@ -389,6 +391,18 @@ var GAME =
 		PLAYER.Jump();
 	},
 };
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
