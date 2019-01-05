@@ -31,4 +31,4 @@ var GAMETERRAIN_FILTER =
 		
 		BLUR_FILTER.Apply( inCanvas, inParameters );
 	}
-};        
+};
