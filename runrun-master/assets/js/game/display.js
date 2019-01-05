@@ -167,8 +167,8 @@ var DISPLAY =
 		this.ms_Animals = new THREE.Object3D();
 		this.ms_Scene.add( this.ms_Animals );
 		this.LoadAnimals( MESHES.Type.Cow );
-		//this.LoadAnimals( MESHES.Type.Deer);
-		//this.LoadAnimals( MESHES.Type.Goat);
+		this.LoadAnimals( MESHES.Type.Deer);
+		this.LoadAnimals( MESHES.Type.Goat);
 	},
 	
 	Display: function()
