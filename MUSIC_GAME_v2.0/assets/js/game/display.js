@@ -138,7 +138,7 @@ var DISPLAY =
 	LoadAnimals: function( inType )
 	{
 		MESHES.Load( inType, function( inGeometry ) {
-			for( var i = 0; i < 400; ++i )
+			for( var i = 0; i < 100; ++i )
 			{
 				var x = ( 0.1 + RAND_MT.Random() * 0.9 ) * GAME.ms_Parameters.widthSegments/2 - GAME.ms_Parameters.widthSegments/8;
 				var z = ( 0.005 + RAND_MT.Random() * 0.99 ) * GAME.ms_Parameters.heightSegments - GAME.ms_Parameters.heightSegments/2;
@@ -167,6 +167,8 @@ var DISPLAY =
 		this.ms_Animals = new THREE.Object3D();
 		this.ms_Scene.add( this.ms_Animals );
 		this.LoadAnimals( MESHES.Type.Cow );
+		this.LoadAnimals( MESHES.Type.Deer );
+		this.LoadAnimals( MESHES.Type.Goat );
 	},
 	
 	Display: function()
