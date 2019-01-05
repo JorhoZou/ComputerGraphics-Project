@@ -56,7 +56,7 @@ var PLAYER =
 	{
 		// Load the player model (fox)
 	if(myparam == 0){
-		MESHES.Load( MESHES.Type.Fox, function( inGeometry ) {
+		MESHES.Load( MESHES.Type.Wolf, function( inGeometry ) {
 			var aMesh = MESHES.AddMorph( inGeometry );
 			aMesh.rotation.set( 0, Math.PI, 0);
 			aMesh.scale.set( 0.01, 0.01, 0.01 );
