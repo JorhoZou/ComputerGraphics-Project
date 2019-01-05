@@ -351,7 +351,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		switch ( event.keyCode ) {
 
-			/*case scope.keys.UP:
+			case scope.keys.UP:
 				scope.pan( new THREE.Vector3( 0, 1, 0 ) );
 				break;
 			case scope.keys.BOTTOM:
@@ -363,7 +363,6 @@ THREE.OrbitControls = function ( object, domElement ) {
 			case scope.keys.RIGHT:
 				scope.pan( new THREE.Vector3( 1, 0, 0 ) );
 				break;
-			*/
 			case scope.keys.ROTATE:
 				state = STATE.ROTATE;
 				break;
