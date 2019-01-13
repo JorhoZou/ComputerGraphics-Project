@@ -237,7 +237,139 @@ var GROUND =
 	}
 }
 
+var sin = Math.sin,
+    cos = Math.cos,
+    tan = Math.tan,
+    rand = Math.random,
+    floor = Math.floor,
+    round = Math.round,
+    PI = Math.PI,
+ 
+    // tree params
+    MAX_BRANCHES = 4,
+    MIN_BRANCHES = 3,
+ 
+    RADIUS_SHRINK = 0.6,
+ 
+    MIN_LENGTH_FACTOR = 0.5,
+    MAX_LENGTH_FACTOR = 0.8,
+ 
+    MIN_OFFSET_FACTOR = 0.7,
+ 
+    MAX_SPREAD_RADIAN = PI / 4,
+    MIN_SPREAD_RADIAN = PI / 10,
+ 
+    BASE_LEAF_SCALE = 5;
 
+function drawTree(start_position, direction, length, depth, radius) {
+    var cylinder, half_length_offset,
+    new_position, new_direction, new_length, new_depth, new_radius,
+    new_base_position, offset_vector,
+    num_branches, color, num_segs;
+    // determine branch color
+    // determine branch color
+    if (depth < 3) {
+        color = 0x008000; // random green color
+    } else {
+        color = 0x7FFFAA; // random brown color
+    }
+
+    num_segs = depth + 2; // min num_segs = 2
+    direction = direction.normalize();
+    //Euler = new THREE.Euler( 0, Math.atan(direction.x/direction.z), Math.acos(direction.y), 'XYZ' )
+    cylinder = new THREE.Mesh(
+           new THREE.CylinderGeometry(radius * RADIUS_SHRINK, // botRad
+                                      radius,
+                                      length, // height
+                                      8,
+                                      1)/*.applyMatrix( new THREE.Matrix4().makeRotationFromEuler(Euler) )*/,   // botOffset
+           new THREE.MeshPhongMaterial( { color: 0x006600, ambient: 0x006600, shading: THREE.FlatShading } ));
+    // rotate the cylinder to follow the direction
+    console.log("up", cylinder.up);
+    // get the offset from start position to cylinder center position
+    half_length_offset = direction.clone();
+    half_length_offset.setLength(length / 2);
+    // calculate center position
+    cylinder.position = start_position.clone();
+
+    cylinder.position.add(half_length_offset);
+    cylinder.castShadow = true;
+    cylinder.receiveShadow = false;
+    
+    /* var tempx = cylinder.position.x;
+    var tempy = cylinder.position.y;
+    var tempz = cylinder.position.z;
+    cylinder.position.x = tempz;
+    cylinder.position.y = tempy;
+    cylinder.position.z = tempx; */
+    DISPLAY.ms_Scene.add( cylinder );
+    /*
+    if (this.ms_realtree != null)
+        THREE.GeometryUtils.merge(this.ms_realtree, cylinder);
+    else
+        this.ms_realtree = cylinder;
+    */
+    
+    // stop recursion if depth reached 1
+    if (depth == 1)
+        return; 
+    // calculate the base start position for next branch
+    // a random offset will be added to it later
+    new_base_position = start_position.clone();
+    new_base_position.add(
+            half_length_offset.clone().multiplyScalar(2.0 * MIN_OFFSET_FACTOR));
+
+    new_depth = depth - 1;
+    new_radius = radius * RADIUS_SHRINK;
+
+    // get a random branch number
+    num_branches = round((rand() * (MAX_BRANCHES - MIN_BRANCHES))) 
+                   + MIN_BRANCHES;
+
+
+    // recursively draw the children branches
+    for (var i = 0; i < num_branches; ++i) {
+
+        // random spread radian
+        var spread_radian = rand() * (MAX_SPREAD_RADIAN - MIN_SPREAD_RADIAN) + 
+                            MIN_SPREAD_RADIAN;
+
+        // generate a vector which is prependicular to the original direction
+        var perp_vec = (new THREE.Vector3(0, 1, 0)).cross(direction); 
+        perp_vec.setLength(direction.length() * tan(spread_radian));
+        console.log(direction, perp_vec, depth);
+        // the new direction equals to the sum of the perpendicular vector
+        // and the original direction
+        new_direction = direction.clone().add(perp_vec).normalize();
+
+        // generate a rotation matrix to rotate the new direction with
+        // the original direction being the rotation axis
+        var rot_mat = new THREE.Matrix4();
+        rot_mat.makeRotationAxis(direction, PI * 2 / num_branches * i);
+        new_direction.transformDirection( rot_mat )
+
+        // random new length for the next branch
+        new_length = (rand() * (MAX_LENGTH_FACTOR - MIN_LENGTH_FACTOR) + 
+                     MIN_LENGTH_FACTOR) * length;
+
+        // caculate the position of the new branch
+        new_position = new_base_position.clone();
+        //offset_vector = half_length_offset.clone();
+        //new_position.add(
+        //        offset_vector.multiplyScalar(
+        //            2.0 * i / (num_branches - 1) * (1 - MIN_OFFSET_FACTOR)));
+        
+        // using setTimeout to make the drawing procedure non-blocking
+        setTimeout((function(a, b, c, d, e) {
+            return function() {
+                drawTree(a, b, c, d, e);
+            };
+        })(new_position, new_direction, new_length, new_depth, new_radius), 0); 
+        
+        //this.drawTree(new_position, new_direction, new_length, new_depth, new_radius);
+    }
+
+}
 var TREES =
 {
 	ms_Geometry: null,
@@ -300,6 +432,46 @@ var TREES =
 		this.ms_Trees.add( aFinalTrees );
 		aFinalTrees.castShadow = true;
 		aFinalTrees.receiveShadow = false;
+	},
+		GenerateRealTrees: function( inNbTrees ){
+		var aTreeGeometry = new THREE.Geometry();
+		
+		for( var i = 0; i < inNbTrees; ++i )
+		{			
+			var x = ( 0.2 + RAND_MT.Random() * 0.7 ) * GAME.ms_Parameters.widthSegments - GAME.ms_Parameters.widthSegments / 2;
+			var z = ( 0.01 + RAND_MT.Random() * 0.98 ) * GAME.ms_Parameters.heightSegments - GAME.ms_Parameters.heightSegments / 2;
+			var y = DISPLAY.GetDepth( Math.floor( GAME.ms_Parameters.widthSegments / 2 + x ), Math.floor( GAME.ms_Parameters.heightSegments / 2 + z ) );
+			
+			if( y > 15.0 )
+			{
+				
+				newx = x * GAME.ms_Parameters.width / GAME.ms_Parameters.widthSegments;
+				newy = y;
+				newz = z * GAME.ms_Parameters.height / GAME.ms_Parameters.heightSegments;
+				var aScale = RAND_MT.Random() * 0.5 + 0.75;
+				//drawTree(new THREE.Vector3(0, 0, 0), new THREE.Vector3( 0, 0, 1), 40*aScale, 2, 2*aScale);
+				/*
+				if (aTree == null){
+					aTree = new THREE.Mesh(  this.ms_Geometry, this.ms_Material );
+				} 
+				aTree.rotation.set( 0, RAND_MT.Random() * Math.PI * 2, 0 );
+				
+				aTree.position.x = x * GAME.ms_Parameters.width / GAME.ms_Parameters.widthSegments;
+				aTree.position.y = y;
+				aTree.position.z = z * GAME.ms_Parameters.height / GAME.ms_Parameters.heightSegments;
+				
+				var aScale = RAND_MT.Random() * 0.5 + 0.75;
+				aTree.scale.set( aScale, aScale, aScale );
+				this.ms_Trees.add( aTree );
+				aTree.castShadow = true;
+				aTree.receiveShadow = false;
+				//THREE.GeometryUtils.merge( aTreeGeometry, aTree );*/
+			}
+		}
+		//var aFinalTrees = new THREE.Mesh( aTreeGeometry, this.ms_Material );
+		//this.ms_Trees.add( aFinalTrees );
+		//aFinalTrees.castShadow = true;
+		//aFinalTrees.receiveShadow = false;
 	},
 };
 
