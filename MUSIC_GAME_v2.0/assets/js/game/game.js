@@ -433,7 +433,7 @@ var TREES =
 		aFinalTrees.castShadow = true;
 		aFinalTrees.receiveShadow = false;
 	},
-		GenerateRealTrees: function( inNbTrees ){
+	GenerateRealTrees: function( inNbTrees ){
 		var aTreeGeometry = new THREE.Geometry();
 		
 		for( var i = 0; i < inNbTrees; ++i )
