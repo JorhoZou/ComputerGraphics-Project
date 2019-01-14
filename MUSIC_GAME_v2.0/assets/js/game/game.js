@@ -624,7 +624,6 @@ var GAME =
 			param: 3,
 			filterparam: 1,
 			filter: [ GAMETERRAIN_FILTER ],
-		//	postgen: [ MOUNTAINS2_COLORS ],
 			canvas: this.ms_HeightMap
 		};
 		this.ms_Clock = new THREE.Clock();
